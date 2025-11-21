@@ -20,10 +20,10 @@ export default function ProfilePage() {
   const [showCamera, setShowCamera] = useState(false);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [whatsappPhone, setWhatsappPhone] = useState('');
-  const [savingPhone, setSavingPhone] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [savingPhoneNumber, setSavingPhoneNumber] = useState(false);
+  const [location, setLocation] = useState('');
+  const [savingLocation, setSavingLocation] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -31,8 +31,8 @@ export default function ProfilePage() {
     }
     if (user && userProfile) {
       setIsProvider(userProfile.isProvider || false);
-      setWhatsappPhone(userProfile.whatsappPhone || '');
       setPhoneNumber(userProfile.phoneNumber || '');
+      setLocation(userProfile.location || '');
       loadPhotos();
     }
     
@@ -217,32 +217,26 @@ export default function ProfilePage() {
     }
   };
 
-  const handleSaveWhatsappPhone = async () => {
+  const handleSaveLocation = async () => {
     if (!user) return;
 
-    // Basic validation - check if it's a valid phone number format
-    const phoneRegex = /^[\d\s\+\-\(\)]+$/;
-    if (whatsappPhone && !phoneRegex.test(whatsappPhone.trim())) {
-      setError('Voer een geldig telefoonnummer in');
-      return;
-    }
-
-    setSavingPhone(true);
+    setSavingLocation(true);
     setError('');
 
     try {
       const userRef = doc(db, 'users', user.uid);
       await updateDoc(userRef, {
-        whatsappPhone: whatsappPhone.trim() || null,
+        location: location.trim() || null,
       });
       
       // Reload the page to update the profile
       window.location.reload();
     } catch (err: any) {
       setError(err.message || 'Fout bij opslaan');
-      setSavingPhone(false);
+      setSavingLocation(false);
     }
   };
+
 
   if (loading) {
     return (
@@ -323,35 +317,35 @@ export default function ProfilePage() {
             )}
           </div>
 
-          {/* WhatsApp Phone Number Form */}
+          {/* Location Form */}
           <div className="mb-12 p-6 bg-gradient-to-br from-rose-100/50 via-pink-100/50 to-purple-100/50 rounded-2xl border border-rose-200/50">
             <h2 className="text-2xl font-light text-rose-900 mb-4 tracking-wide">
-              WhatsApp Telefoonnummer
+              Locatie
             </h2>
             <p className="text-rose-700/80 mb-6 font-light leading-relaxed">
-              Voeg je WhatsApp telefoonnummer toe zodat anderen je kunnen bereiken.
+              Voeg je locatie toe zodat anderen weten waar je bent.
             </p>
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
                 <input
-                  type="tel"
-                  value={whatsappPhone}
-                  onChange={(e) => setWhatsappPhone(e.target.value)}
-                  placeholder="+31 6 12345678"
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  placeholder="Bijv. Amsterdam, Rotterdam, Utrecht"
                   className="w-full px-4 py-3 rounded-2xl border border-rose-300 bg-white/80 backdrop-blur-sm text-rose-900 placeholder-rose-400/60 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent font-light"
                 />
               </div>
               <button
-                onClick={handleSaveWhatsappPhone}
-                disabled={savingPhone}
+                onClick={handleSaveLocation}
+                disabled={savingLocation}
                 className="px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full text-sm font-medium hover:from-rose-600 hover:to-pink-600 shadow-lg shadow-rose-300/50 hover:shadow-xl hover:shadow-rose-400/50 transition-all transform hover:scale-105 disabled:opacity-50 disabled:transform-none"
               >
-                {savingPhone ? 'Opslaan...' : 'Opslaan'}
+                {savingLocation ? 'Opslaan...' : 'Opslaan'}
               </button>
             </div>
-            {userProfile?.whatsappPhone && (
+            {userProfile?.location && (
               <p className="mt-4 text-sm text-rose-600/80 font-light">
-                Huidig opgeslagen nummer: {userProfile.whatsappPhone}
+                Huidige locatie: {userProfile.location}
               </p>
             )}
           </div>

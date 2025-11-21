@@ -33,7 +33,7 @@ export interface ProfilePhoto {
   isPrimary: boolean;
 }
 
-export const createService = async (service: Omit<Service, 'id' | 'createdAt'>): Promise<string> => {
+export const createService = async (service: Omit<Service, 'id' | 'createdAt' | 'isActive'>): Promise<string> => {
   const servicesRef = collection(db, 'services');
   const newServiceRef = doc(servicesRef);
   

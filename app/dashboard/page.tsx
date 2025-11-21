@@ -168,6 +168,11 @@ export default function DashboardPage() {
                   <h3 className="text-xl font-light text-rose-900 mb-2 tracking-wide">
                     {provider.providerProfile?.displayName || 'Aanbieder'}
                   </h3>
+                  {provider.providerProfile?.location && (
+                    <p className="text-rose-600/70 text-sm font-light mb-2 flex items-center">
+                      📍 {provider.providerProfile.location}
+                    </p>
+                  )}
                   {provider.providerProfile?.whatsappPhone || provider.providerProfile?.phoneNumber ? (
                     <a
                       href={`tel:${provider.providerProfile?.whatsappPhone || provider.providerProfile?.phoneNumber}`}

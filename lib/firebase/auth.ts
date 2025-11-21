@@ -18,6 +18,7 @@ export interface UserProfile {
   isClient?: boolean;
   whatsappPhone?: string;
   phoneNumber?: string;
+  location?: string;
   createdAt: Date;
   isVerified: boolean;
 }
