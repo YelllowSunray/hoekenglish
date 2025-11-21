@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf8f6;
+  --foreground: #2d1b2e;
 }
 
 @theme inline {
@@ -12,15 +12,26 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Smooth scrolling and elegant transitions */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Gradient backgrounds */
+.gradient-rose {
+  background: linear-gradient(135deg, #f5e6e8 0%, #e8d5d9 50%, #f0e1e4 100%);
+}
+
+.gradient-purple {
+  background: linear-gradient(135deg, #e8d5e8 0%, #d4c4d8 50%, #e1d1e5 100%);
+}
+
+.gradient-warm {
+  background: linear-gradient(135deg, #faf5f0 0%, #f5ede8 50%, #faf8f6 100%);
 }
