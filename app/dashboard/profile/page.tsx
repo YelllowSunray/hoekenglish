@@ -369,15 +369,13 @@ export default function ProfilePage() {
                 I want to sell sex
               </span>
             </label>
-            {isProvider && (
-              <button
-                onClick={handleSaveProviderStatus}
-                disabled={saving}
-                className="mt-4 px-6 py-2.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full text-sm font-medium hover:from-rose-600 hover:to-pink-600 shadow-lg shadow-rose-300/50 hover:shadow-xl hover:shadow-rose-400/50 transition-all transform hover:scale-105 disabled:opacity-50"
-              >
-                {saving ? 'Saving...' : 'Save'}
-              </button>
-            )}
+            <button
+              onClick={handleSaveProviderStatus}
+              disabled={saving}
+              className="mt-4 px-6 py-2.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full text-sm font-medium hover:from-rose-600 hover:to-pink-600 shadow-lg shadow-rose-300/50 hover:shadow-xl hover:shadow-rose-400/50 transition-all transform hover:scale-105 disabled:opacity-50 disabled:transform-none"
+            >
+              {saving ? 'Saving...' : 'Save'}
+            </button>
           </div>
 
           {/* Photo Upload Section */}
