@@ -65,7 +65,7 @@ export default function DashboardPage() {
   if (loading || loadingProviders) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-rose-50 via-purple-50 to-pink-50 flex items-center justify-center">
-        <p className="text-rose-700 font-light">Laden...</p>
+        <p className="text-rose-700 font-light">Loading...</p>
       </div>
     );
   }
@@ -93,7 +93,7 @@ export default function DashboardPage() {
                     href="/dashboard/profile"
                     className="text-rose-700 hover:text-rose-900 px-4 py-2 rounded-full text-sm font-medium transition-all hover:bg-rose-50"
                   >
-                    Profiel
+                    Profile
                   </Link>
                 )}
                 {userProfile?.isClient && (
@@ -101,7 +101,7 @@ export default function DashboardPage() {
                     href="/dashboard/browse"
                     className="text-rose-700 hover:text-rose-900 px-4 py-2 rounded-full text-sm font-medium transition-all hover:bg-rose-50"
                   >
-                    Bladeren
+                    Browse
                   </Link>
                 )}
               </div>
@@ -117,7 +117,7 @@ export default function DashboardPage() {
                 onClick={handleLogout}
                 className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:from-rose-600 hover:to-pink-600 shadow-lg shadow-rose-200/50 hover:shadow-xl hover:shadow-rose-300/50 transition-all"
               >
-                Uitloggen
+                Logout
               </button>
             </div>
           </div>
@@ -148,7 +148,7 @@ export default function DashboardPage() {
                   >
                     <img
                       src={primaryPhoto.url}
-                      alt={provider.providerProfile?.displayName || 'Aanbieder'}
+                      alt={provider.providerProfile?.displayName || 'Provider'}
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-4 right-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg shadow-rose-300/50">
@@ -166,7 +166,7 @@ export default function DashboardPage() {
                 )}
                 <div className="p-6">
                   <h3 className="text-xl font-light text-rose-900 mb-2 tracking-wide">
-                    {provider.providerProfile?.displayName || 'Aanbieder'}
+                    {provider.providerProfile?.displayName || 'Provider'}
                   </h3>
                   {provider.providerProfile?.location && (
                     <p className="text-rose-600/70 text-sm font-light mb-2 flex items-center">
@@ -182,7 +182,7 @@ export default function DashboardPage() {
                     </a>
                   ) : (
                     <p className="text-rose-700/80 text-sm font-light mt-2">
-                      Geen telefoonnummer
+                      No phone number
                     </p>
                   )}
                 </div>
@@ -194,7 +194,7 @@ export default function DashboardPage() {
         {providers.length === 0 && (
           <div className="bg-white/60 backdrop-blur-sm rounded-3xl shadow-lg shadow-rose-100/50 border border-rose-100/50 p-12 text-center">
             <p className="text-xl text-rose-800/80 font-light">
-              Geen aanbieders gevonden.
+              No providers found.
             </p>
           </div>
         )}

@@ -28,7 +28,7 @@ export default function LoginPage() {
         router.push('/dashboard');
       }
     } catch (err: any) {
-      setError(err.message || 'Er is een fout opgetreden');
+      setError(err.message || 'An error occurred');
     } finally {
       setLoading(false);
     }
@@ -44,7 +44,7 @@ export default function LoginPage() {
             </Link>
             <div className="w-16 h-1 bg-gradient-to-r from-rose-400 to-pink-400 mx-auto rounded-full mb-6"></div>
             <h2 className="text-3xl font-light text-rose-900 tracking-wide">
-              {isLogin ? 'Welkom terug' : 'Begin je avontuur'}
+              {isLogin ? 'Welcome back' : 'Start your adventure'}
             </h2>
           </div>
           
@@ -59,7 +59,7 @@ export default function LoginPage() {
               {!isLogin && (
                 <div>
                   <label htmlFor="display-name" className="block text-sm font-light text-rose-700 mb-2">
-                    Naam
+                    Name
                   </label>
                   <input
                     id="display-name"
@@ -67,7 +67,7 @@ export default function LoginPage() {
                     type="text"
                     required
                     className="w-full px-4 py-3 border border-rose-200/50 bg-white/60 backdrop-blur-sm rounded-2xl placeholder-rose-300 text-rose-900 focus:outline-none focus:ring-2 focus:ring-rose-400/50 focus:border-rose-400 transition-all font-light"
-                    placeholder="Je volledige naam"
+                    placeholder="Your full name"
                     value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
                   />
@@ -75,7 +75,7 @@ export default function LoginPage() {
               )}
               <div>
                 <label htmlFor="email-address" className="block text-sm font-light text-rose-700 mb-2">
-                  E-mailadres
+                  Email address
                 </label>
                 <input
                   id="email-address"
@@ -84,14 +84,14 @@ export default function LoginPage() {
                   autoComplete="email"
                   required
                   className="w-full px-4 py-3 border border-rose-200/50 bg-white/60 backdrop-blur-sm rounded-2xl placeholder-rose-300 text-rose-900 focus:outline-none focus:ring-2 focus:ring-rose-400/50 focus:border-rose-400 transition-all font-light"
-                  placeholder="jouw@email.nl"
+                  placeholder="your@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div>
                 <label htmlFor="password" className="block text-sm font-light text-rose-700 mb-2">
-                  Wachtwoord
+                  Password
                 </label>
                 <input
                   id="password"
@@ -113,7 +113,7 @@ export default function LoginPage() {
                 disabled={loading}
                 className="w-full flex justify-center py-3.5 px-6 border border-transparent text-base font-medium rounded-full text-white bg-gradient-to-r from-rose-500 via-pink-500 to-rose-500 hover:from-rose-600 hover:via-pink-600 hover:to-rose-600 shadow-lg shadow-rose-300/50 hover:shadow-xl hover:shadow-rose-400/50 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
-                {loading ? 'Bezig...' : isLogin ? 'Inloggen' : 'Registreren'}
+                {loading ? 'Loading...' : isLogin ? 'Login' : 'Sign Up'}
               </button>
             </div>
 
@@ -124,8 +124,8 @@ export default function LoginPage() {
                 className="text-rose-600 hover:text-rose-700 font-light text-sm transition-colors"
               >
                 {isLogin
-                  ? 'Nog geen account? Registreer hier'
-                  : 'Al een account? Log hier in'}
+                  ? "Don't have an account? Sign up here"
+                  : 'Already have an account? Log in here'}
               </button>
             </div>
           </form>

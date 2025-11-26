@@ -60,12 +60,12 @@ export default function ProfilePage() {
 
     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
     if (!allowedTypes.includes(file.type)) {
-      setError('Alleen afbeeldingen zijn toegestaan (JPG, PNG, WEBP)');
+      setError('Only images are allowed (JPG, PNG, WEBP)');
       return;
     }
 
     if (file.size > 10 * 1024 * 1024) {
-      setError('Bestand is te groot (max 10MB)');
+      setError('File is too large (max 10MB)');
       return;
     }
 
@@ -84,7 +84,7 @@ export default function ProfilePage() {
       await addProfilePhoto(user.uid, url, isFirstPhoto);
       await loadPhotos();
     } catch (err: any) {
-      setError(err.message || 'Upload mislukt');
+      setError(err.message || 'Upload failed');
     } finally {
       setUploading(false);
     }
@@ -105,7 +105,7 @@ export default function ProfilePage() {
         }
       }, 100);
     } catch (err: any) {
-      setError('Kan camera niet openen. Controleer je browser instellingen.');
+      setError('Cannot open camera. Check your browser settings.');
     }
   };
 
@@ -153,20 +153,20 @@ export default function ProfilePage() {
       await Promise.all(batch);
       await loadPhotos();
     } catch (err: any) {
-      setError(err.message || 'Fout bij instellen hoofdfoto');
+      setError(err.message || 'Error setting primary photo');
     }
   };
 
   const handleDeletePhoto = async (photoId: string, photoUrl: string) => {
     if (!user) return;
-    if (!confirm('Weet je zeker dat je deze foto wilt verwijderen?')) return;
+    if (!confirm('Are you sure you want to delete this photo?')) return;
     
     try {
       await deleteProfilePhoto(photoId);
       // Optionally delete from storage too
       await loadPhotos();
     } catch (err: any) {
-      setError(err.message || 'Fout bij verwijderen foto');
+      setError(err.message || 'Error deleting photo');
     }
   };
 
@@ -185,7 +185,7 @@ export default function ProfilePage() {
       // Reload the page to update the profile
       window.location.reload();
     } catch (err: any) {
-      setError(err.message || 'Fout bij opslaan');
+      setError(err.message || 'Error saving');
       setSaving(false);
     }
   };
@@ -196,7 +196,7 @@ export default function ProfilePage() {
     // Basic validation - check if it's a valid phone number format
     const phoneRegex = /^[\d\s\+\-\(\)]+$/;
     if (phoneNumber && !phoneRegex.test(phoneNumber.trim())) {
-      setError('Voer een geldig telefoonnummer in');
+      setError('Enter a valid phone number');
       return;
     }
 
@@ -212,7 +212,7 @@ export default function ProfilePage() {
       // Reload the page to update the profile
       window.location.reload();
     } catch (err: any) {
-      setError(err.message || 'Fout bij opslaan');
+      setError(err.message || 'Error saving');
       setSavingPhoneNumber(false);
     }
   };
@@ -232,7 +232,7 @@ export default function ProfilePage() {
       // Reload the page to update the profile
       window.location.reload();
     } catch (err: any) {
-      setError(err.message || 'Fout bij opslaan');
+      setError(err.message || 'Error saving');
       setSavingLocation(false);
     }
   };
@@ -241,7 +241,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-rose-50 via-purple-50 to-pink-50">
-        <p className="text-rose-700">Laden...</p>
+        <p className="text-rose-700">Loading...</p>
       </div>
     );
   }
@@ -275,7 +275,7 @@ export default function ProfilePage() {
       <main className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-xl shadow-rose-100/50 border border-rose-100/50 p-8 md:p-12">
           <h1 className="text-4xl font-light text-rose-900 mb-8 tracking-wide">
-            Profiel Instellen
+            Profile Settings
           </h1>
 
           {error && (
@@ -287,10 +287,10 @@ export default function ProfilePage() {
           {/* Phone Number Form */}
           <div className="mb-12 p-6 bg-gradient-to-br from-rose-100/50 via-pink-100/50 to-purple-100/50 rounded-2xl border border-rose-200/50">
             <h2 className="text-2xl font-light text-rose-900 mb-4 tracking-wide">
-              Telefoonnummer
+              Phone Number
             </h2>
             <p className="text-rose-700/80 mb-6 font-light leading-relaxed">
-              Voeg je telefoonnummer toe zodat anderen je kunnen bereiken.
+              Add your phone number so others can reach you.
             </p>
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
@@ -307,12 +307,12 @@ export default function ProfilePage() {
                 disabled={savingPhoneNumber}
                 className="px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full text-sm font-medium hover:from-rose-600 hover:to-pink-600 shadow-lg shadow-rose-300/50 hover:shadow-xl hover:shadow-rose-400/50 transition-all transform hover:scale-105 disabled:opacity-50 disabled:transform-none"
               >
-                {savingPhoneNumber ? 'Opslaan...' : 'Opslaan'}
+                {savingPhoneNumber ? 'Saving...' : 'Save'}
               </button>
             </div>
             {userProfile?.phoneNumber && (
               <p className="mt-4 text-sm text-rose-600/80 font-light">
-                Huidig opgeslagen nummer: {userProfile.phoneNumber}
+                Currently saved number: {userProfile.phoneNumber}
               </p>
             )}
           </div>
@@ -320,10 +320,10 @@ export default function ProfilePage() {
           {/* Location Form */}
           <div className="mb-12 p-6 bg-gradient-to-br from-rose-100/50 via-pink-100/50 to-purple-100/50 rounded-2xl border border-rose-200/50">
             <h2 className="text-2xl font-light text-rose-900 mb-4 tracking-wide">
-              Locatie
+              Location
             </h2>
             <p className="text-rose-700/80 mb-6 font-light leading-relaxed">
-              Voeg je locatie toe zodat anderen weten waar je bent.
+              Add your location so others know where you are.
             </p>
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
@@ -331,7 +331,7 @@ export default function ProfilePage() {
                   type="text"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  placeholder="Bijv. Amsterdam, Rotterdam, Utrecht"
+                  placeholder="E.g. Amsterdam, Rotterdam, Utrecht"
                   className="w-full px-4 py-3 rounded-2xl border border-rose-300 bg-white/80 backdrop-blur-sm text-rose-900 placeholder-rose-400/60 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent font-light"
                 />
               </div>
@@ -340,12 +340,12 @@ export default function ProfilePage() {
                 disabled={savingLocation}
                 className="px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full text-sm font-medium hover:from-rose-600 hover:to-pink-600 shadow-lg shadow-rose-300/50 hover:shadow-xl hover:shadow-rose-400/50 transition-all transform hover:scale-105 disabled:opacity-50 disabled:transform-none"
               >
-                {savingLocation ? 'Opslaan...' : 'Opslaan'}
+                {savingLocation ? 'Saving...' : 'Save'}
               </button>
             </div>
             {userProfile?.location && (
               <p className="mt-4 text-sm text-rose-600/80 font-light">
-                Huidige locatie: {userProfile.location}
+                Current location: {userProfile.location}
               </p>
             )}
           </div>
@@ -353,10 +353,10 @@ export default function ProfilePage() {
           {/* Provider Toggle */}
           <div className="mb-12 p-6 bg-gradient-to-br from-rose-100/50 via-pink-100/50 to-purple-100/50 rounded-2xl border border-rose-200/50">
             <h2 className="text-2xl font-light text-rose-900 mb-4 tracking-wide">
-              Aanbieder worden
+              Become a Provider
             </h2>
             <p className="text-rose-700/80 mb-6 font-light leading-relaxed">
-              Schakel dit in als je seks wilt verkopen. Je kunt altijd zowel verkopen als kopen.
+              Enable this if you want to sell sex. You can always both sell and buy.
             </p>
             <label className="flex items-center space-x-4 cursor-pointer">
               <input
@@ -366,7 +366,7 @@ export default function ProfilePage() {
                 className="w-6 h-6 rounded border-rose-300 text-rose-500 focus:ring-rose-400 focus:ring-2"
               />
               <span className="text-lg font-light text-rose-900">
-                Ik wil seks verkopen
+                I want to sell sex
               </span>
             </label>
             {isProvider && (
@@ -375,7 +375,7 @@ export default function ProfilePage() {
                 disabled={saving}
                 className="mt-4 px-6 py-2.5 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full text-sm font-medium hover:from-rose-600 hover:to-pink-600 shadow-lg shadow-rose-300/50 hover:shadow-xl hover:shadow-rose-400/50 transition-all transform hover:scale-105 disabled:opacity-50"
               >
-                {saving ? 'Opslaan...' : 'Opslaan'}
+                {saving ? 'Saving...' : 'Save'}
               </button>
             )}
           </div>
@@ -384,10 +384,10 @@ export default function ProfilePage() {
           {isProvider && (
             <div className="mb-8">
               <h2 className="text-2xl font-light text-rose-900 mb-6 tracking-wide">
-                Profielfoto's
+                Profile Photos
               </h2>
               <p className="text-rose-700/80 mb-6 font-light leading-relaxed">
-                Upload foto's van jezelf of neem een selfie. De eerste foto wordt automatisch je hoofdfoto.
+                Upload photos of yourself or take a selfie. The first photo will automatically be your primary photo.
               </p>
 
               {/* Camera Section */}
